@@ -1,4 +1,4 @@
-<x-layout title="Empresas" :mensagem-sucesso="$mensagemSucesso">
+<x-layout title="Empresas" :success-message="$successMessage">
     <a href="{{ route('companies.create') }}" class="btn btn-dark mb-2">Adicionar</a>
 
     <div class="container">

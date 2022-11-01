@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Apis\CompaniesApi;
+use App\Http\Apis\EmployeesApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/employees', EmployeesApi::class);
+Route::apiResource('/companies', CompaniesApi::class);

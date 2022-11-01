@@ -17,10 +17,10 @@ class EmployeesController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        $mensagemSucesso = session('mensagem.sucesso');
+        $successMessage = session('success.message');
 
         return view('employees.index')->with('employees', $employees)
-            ->with('mensagemSucesso', $mensagemSucesso);
+            ->with('successMessage', $successMessage);
     }
 
     public function create(): View
@@ -32,7 +32,6 @@ class EmployeesController extends Controller
 
     public function store(EmployeesFormRequest $request): RedirectResponse
     {
-        // $employee = $this->repository->add($request);
         Employee::create([
             'cpf' => $request->cpf,
             'name' => $request->name,
@@ -40,7 +39,7 @@ class EmployeesController extends Controller
         ]);
 
         return to_route('employees.index')
-            ->with('mensagem.sucesso', "Empresa '{$request->name}' adicionada com sucesso");
+            ->with('success.message', "Empresa '{$request->name}' adicionada com sucesso");
     }
 
     public function destroy(Employee $employee): RedirectResponse
@@ -48,7 +47,7 @@ class EmployeesController extends Controller
         $employee->delete();
 
         return to_route('employees.index')
-            ->with('mensagem.sucesso', "Empresa '{$employee->name}' removida com sucesso");
+            ->with('success.message', "Empresa '{$employee->name}' removida com sucesso");
     }
 
     public function edit(Employee $employee): View
@@ -66,16 +65,14 @@ class EmployeesController extends Controller
         $employee->save();
 
         return to_route('employees.index')
-            ->with('mensagem.sucesso', "Empresa '{$employee->name}' atualizada com sucesso");
+            ->with('success.message', "Empresa '{$employee->name}' atualizada com sucesso");
     }
 
     /**
     * @return \Illuminate\Support\Collection
     */
-    // public function export(object $employees)
     public function export(): BinaryFileResponse
     {
-        // return Excel::download(new EmployeesExport, 'employees.xlsx', null, $employees);
         return Excel::download(new EmployeesExport, 'employees.xlsx');
     }
 
@@ -93,6 +90,6 @@ class EmployeesController extends Controller
         }
 
         return to_route('employees.index')
-            ->with('mensagem.sucesso', "Nenhum arquivo encontrado");
+            ->with('success.message', "Nenhum arquivo encontrado");
     }
 }

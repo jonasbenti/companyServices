@@ -13,10 +13,10 @@ class CompaniesController extends Controller
     public function index(): View
     {
         $companies = Company::all();
-        $mensagemSucesso = session('mensagem.sucesso');
+        $successMessage = session('success.message');
 
         return view('companies.index')->with('companies', $companies)
-            ->with('mensagemSucesso', $mensagemSucesso);
+            ->with('successMessage', $successMessage);
     }
 
     public function create(): View
@@ -26,14 +26,13 @@ class CompaniesController extends Controller
 
     public function store(CompaniesFormRequest $request): RedirectResponse
     {
-        // $company = $this->repository->add($request);
         Company::create([
             'cnpj' => $request->cnpj,
             'name' => $request->name
         ]);
 
         return to_route('companies.index')
-            ->with('mensagem.sucesso', "Empresa '{$request->name}' adicionada com sucesso");
+            ->with('success.message', "Empresa '{$request->name}' adicionada com sucesso");
     }
 
     public function destroy(Company $company): RedirectResponse
@@ -41,7 +40,7 @@ class CompaniesController extends Controller
         EventsCompanyDeleted::dispatch($company->id);
 
         return to_route('companies.index')
-            ->with('mensagem.sucesso', "Empresa '{$company->name}' na fila de serviços para ser excluida, aguarde por favor");
+            ->with('success.message', "Empresa '{$company->name}' na fila de serviços para ser excluida, aguarde por favor");
     }
 
     public function edit(Company $company): View
@@ -55,6 +54,6 @@ class CompaniesController extends Controller
         $company->save();
 
         return to_route('companies.index')
-            ->with('mensagem.sucesso', "Empresa '{$company->name}' atualizada com sucesso");
+            ->with('success.message', "Empresa '{$company->name}' atualizada com sucesso");
     }
 }

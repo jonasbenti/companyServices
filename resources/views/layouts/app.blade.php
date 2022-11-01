@@ -7,9 +7,9 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        @isset($mensagemSucesso)
+        @isset($successMessage)
         <div class="alert alert-success">
-            {{ $mensagemSucesso }}
+            {{ $successMessage }}
         </div>
         @endisset
 

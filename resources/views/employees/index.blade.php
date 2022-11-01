@@ -1,5 +1,5 @@
 <x-layout title="Funcionários"
-    :mensagem-sucesso="$mensagemSucesso"
+    :success-message="$successMessage"
 >
     <a href="{{ route('employees.create') }}" class="btn btn-dark mb-2">Adicionar</a>
 

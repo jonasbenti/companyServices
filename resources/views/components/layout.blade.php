@@ -35,9 +35,9 @@
 <div class="container">
     <h1>{{ $title }}</h1>
 
-    @isset($mensagemSucesso)
+    @isset($successMessage)
         <div class="alert alert-success">
-            {{ $mensagemSucesso }}
+            {{ $successMessage }}
         </div>
     @endisset
 
