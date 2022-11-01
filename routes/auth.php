@@ -63,4 +63,10 @@ Route::middleware('auth')->group(function () {
         ->except(['show']);
     Route::resource('/employees', EmployeesController::class)
         ->except(['show']);
+
+    Route::controller(EmployeesController::class)->group(function(){
+        // Route::get('users', 'index');
+        Route::get('employees-export', 'export')->name('employees.export');
+        Route::post('employees-import', 'import')->name('employees.import');
+    });
 });

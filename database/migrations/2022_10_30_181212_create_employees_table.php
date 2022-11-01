@@ -15,18 +15,11 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('company_id');
             $table->string('cpf', 11)->unique();
             $table->string('name', 220);
             $table->foreignId('company_id')
                 ->constrained('companies')
                 ->onDelete('cascade');
-            // $table->foreign('company_id')
-            //     ->references('id')
-            //     ->on('companies')
-            //     ->constrained()
-            //     ->onDelete('cascade');
-            // $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

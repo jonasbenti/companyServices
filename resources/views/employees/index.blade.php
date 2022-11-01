@@ -1,9 +1,23 @@
-<x-layout title="Funcionários" :mensagem-sucesso="$mensagemSucesso">
+<x-layout title="Funcionários"
+    :mensagem-sucesso="$mensagemSucesso"
+>
     <a href="{{ route('employees.create') }}" class="btn btn-dark mb-2">Adicionar</a>
+
+    <form action="{{ route('employees.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file" class="form-control">
+        <br>
+        <button class="btn btn-success">Importar funcionarios</button>
+    </form>
 
     <div class="container">
         <table class="table table-striped table-hover caption-top rounded">
-            <caption class="text-center"><h3>Lista de Funcionários</h3></caption>
+            <caption class="text-center">
+                <h3>Lista de Funcionários</h3>
+                <a class="btn btn-warning float-begin" href="{{ route('employees.export') }}">
+                    Exportar Lista de funcionários
+                </a>
+            </caption>
             <thead class="table-primary" style="border-radius: 5px;">
                 <tr>
                     <td class="text-center">Ações</td>
